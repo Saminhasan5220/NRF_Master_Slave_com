@@ -41,6 +41,7 @@ void setup() {
     attachInterrupt(digitalPinToInterrupt(3) , getRadioData, FALLING); //Create interrupt: 0 for pin 2 or 1 for pin 3, the name of the interrupt function or ISR, and condition to trigger interrupt
     radio.setRetries(3,5); // delay, count
 send();
+delay(4000);
 }
 
 void loop() {
@@ -139,4 +140,3 @@ void recvWithEndMarker() {
 }
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
