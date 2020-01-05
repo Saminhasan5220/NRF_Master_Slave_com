@@ -27,18 +27,18 @@ boolean newSerialData = false;
 volatile long txID,RXid;
 volatile long txFAIL;
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(57600);
     Serial.println("<Arduino is ready>");
     Serial.println("MasterSwapRoles Starting");
 
     radio.begin();
-    radio.setDataRate( RF24_250KBPS );
-
+    radio.setDataRate( RF24_2MBPS);
+    radio.setPALevel(RF24_PA_HIGH);
     radio.openWritingPipe(slaveAddress);
     radio.openReadingPipe(1, masterAddress);
 
     radio.maskIRQ(1,1,0); //mask all IRQ triggers except for receive (1 is mask, 0 is no mask)
-    attachInterrupt(digitalPinToInterrupt(3) , getRadioData, FALLING); //Create interrupt: 0 for pin 2 or 1 for pin 3, the name of the interrupt function or ISR, and condition to trigger interrupt
+    attachInterrupt(digitalPinToInterrupt(2) , getRadioData, FALLING); //Create interrupt: 0 for pin 2 or 1 for pin 3, the name of the interrupt function or ISR, and condition to trigger interrupt
     radio.setRetries(3,5); // delay, count
 send();
 delay(4000);
